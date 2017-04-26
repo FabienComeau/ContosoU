@@ -71,9 +71,9 @@ namespace ContosoU
                 app.UseExceptionHandler("/Home/Error");
             }
 
-            app.UseStaticFiles();
+            app.UseStaticFiles();//this allows you to use static file
 
-            app.UseIdentity();
+            app.UseIdentity();//this allows you to use identity framwork
 
             // Add external authentication middleware below. To configure them please see https://go.microsoft.com/fwlink/?LinkID=532715
 
