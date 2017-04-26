@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp1.1</TargetFramework>
@@ -11,6 +11,12 @@
   <PropertyGroup>
     <UserSecretsId>aspnet-ContosoU-b764b5af-a67d-442e-bd2b-0a3d4ff94ded</UserSecretsId>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="wwwroot\images\slides\1.jpg" />
+    <Content Include="wwwroot\images\slides\2.jpg" />
+    <Content Include="wwwroot\images\slides\3.jpg" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.1" />
