@@ -1,3 +1,24 @@
-﻿@{
+﻿@*fcomeau: setup site style different for home page*@
+@*@{
     Layout = "_LayoutCarousel";
+}*@
+
+@{ 
+    //retrive current controller
+    string controller = ViewContext.RouteData.Values["Controller"].ToString();
+
+    //retrive current action
+    string action = ViewContext.RouteData.Values["Action"].ToString();
+
+    //check if user is on Home controller and Index Action
+    if (controller == "Home" && action == "Index")
+    {
+        Layout = "_LayoutCarousel";
+
+    }
+    else
+    {
+        Layout = "_Layout";
+
+    }
 }
