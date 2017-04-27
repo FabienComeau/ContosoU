@@ -13,6 +13,7 @@ using ContosoU.Data;
 using ContosoU.Models;
 using ContosoU.Services;
 
+
 namespace ContosoU
 {
     public class Startup
@@ -42,7 +43,10 @@ namespace ContosoU
             // Add framework services.
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-
+            //fcomeau: School services
+            services.AddDbContext<SchoolContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            ////
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
@@ -55,7 +59,8 @@ namespace ContosoU
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory,SchoolContext context)
+                                                                                        /*fcomeau: add schoolcontext middleware to the pipeline*/
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
@@ -73,7 +78,7 @@ namespace ContosoU
 
             app.UseStaticFiles();//this allows you to use static file
 
-            app.UseIdentity();//this allows you to use identity framwork
+            app.UseIdentity();//this allows you to use identity framwork (register and logging)
 
             // Add external authentication middleware below. To configure them please see https://go.microsoft.com/fwlink/?LinkID=532715
 
@@ -83,6 +88,12 @@ namespace ContosoU
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+            //initialize the database with SEED data
+            DbInitializer.Initialize(context);
+            /*the first time you run the application the database will be created and seeded with test data.
+             * whenever you change your data model, you can delete the database, update
+             * your seed method and start fresh with a new
+             */
         }
     }
 }
