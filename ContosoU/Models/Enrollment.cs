@@ -13,7 +13,7 @@
          * the CourseID property is a foreign key, and the corresponding navigation property is Course. an Enrollment Entity is assosiated with
          * one Course Entity
          */ 
-        public int CourseID { get; set; }//FK
+        public int CourseID { get; set; }//FK it knows automaticaly its a foreign key
         public int StudentID { get; set; }//FK
         /*
          * the studentID property is a foreign key, and the corresponding navigation property is Student, an Enrollment Entity is assosiated with

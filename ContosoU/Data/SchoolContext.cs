@@ -23,6 +23,11 @@ namespace ContosoU.Data
         public DbSet<Enrollment> Enrollments { get; set; }
         public DbSet<Course> Courses { get; set; }
 
+        //complex data model
+        public DbSet<Department> Departments { get; set; }
+        public DbSet<OfficeAssignment> OfficeAssignments { get; set; }
+        public DbSet<CourseAssignment> CourseAssignments { get; set; }
+
         /*
          * when the database is created, EF(entity frameworks) creates table that have names the same as the DbSet property names.
          * Property names for collections are typically plural(Students rather than Student)
@@ -30,12 +35,21 @@ namespace ContosoU.Data
          * Developers disagree about whether table names should be pluralized or not.
          * For this demo, let's override the default dehavior         
          */
-         protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Course>().ToTable("Course");
             modelBuilder.Entity<Enrollment>().ToTable("Enrollment");
             modelBuilder.Entity<Student>().ToTable("Student");
             modelBuilder.Entity<Instructor>().ToTable("Instructor");
+            modelBuilder.Entity<Person>().ToTable("Person");
+
+            //this is were you input the fluid api(complex Data model)
+            modelBuilder.Entity<OfficeAssignment>().ToTable("OfficeAssignment");
+            modelBuilder.Entity<CourseAssignment>().ToTable("CourseAssignment");
+            modelBuilder.Entity<Department>().ToTable("Department");
+
+            //composite PK on CourseAssignment (CourseID, InstructorID)
+            modelBuilder.Entity<CourseAssignment>().HasKey(c => new { c.CourseID, c.InstructorID });
         }
     }
 }

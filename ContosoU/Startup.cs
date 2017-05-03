@@ -43,7 +43,7 @@ namespace ContosoU
             // Add framework services.
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            //fcomeau: School services
+            //fcomeau: School services this is one of the steps for migrating
             services.AddDbContext<SchoolContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             ////
