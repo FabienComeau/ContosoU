@@ -15,9 +15,11 @@ namespace ContosoU.Models
         
         [Display(Name = "Number")]
         public int CourseID { get; set; }//PK
+
         [StringLength(50,MinimumLength =3)]
         [Required]
         public string Title { get; set; }
+
         [Range(0,5)]
         public int Credits { get; set; }
 
